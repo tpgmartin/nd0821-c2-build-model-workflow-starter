@@ -33,7 +33,7 @@ def go(args):
     logger.info("Drop outliers and convert `last_review` to datetime")
     # Drop outliers
     min_price = args.min_price
-    max_price = args.min_price
+    max_price = args.max_price
     idx = df['price'].between(min_price, max_price)
     df = df[idx].copy()
     # Convert last_review to datetime
@@ -43,18 +43,16 @@ def go(args):
     # We use a temporary directory so we do not leave any trace behind
     with tempfile.TemporaryDirectory() as tmp_dir:
 
-        artifact_name = f"{args.output_artifact}.csv"
-
         # Get the path on disk within the temp directory
-        temp_path = os.path.join(tmp_dir, artifact_name)
+        temp_path = os.path.join(tmp_dir, args.output_artifact)
 
-        logger.info(f"Uploading dataset to {artifact_name}")
+        logger.info(f"Uploading dataset to {args.output_artifact}")
 
         # Save then upload to W&B
         df.to_csv(temp_path, index=False)
 
         artifact = wandb.Artifact(
-            name=artifact_name,
+            name=args.output_artifact,
             type=args.output_type,
             description=args.output_description,
         )
