@@ -6,28 +6,28 @@ entry_points:
     parameters:
 
       input_artifact:
-        description: ## ADD DESCRIPTION
+        description: Input CSV file to be cleaned
         type: string
 
       output_artifact:
-        description: ## ADD DESCRIPTION
+        description: Output CSV
         type: string
 
       output_type:
-        description: ## ADD DESCRIPTION
+        description: Type of the output artifact
         type: string
 
       output_description:
-        description: ## ADD DESCRIPTION
+        description: Description for the output artifact
         type: string
 
       min_price:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: Minimum price to consider
+        type: float
 
       max_price:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: Maximum price to consider
+        type: float
 
 
     command: >-
